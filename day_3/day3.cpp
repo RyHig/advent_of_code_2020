@@ -1,13 +1,5 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
+#include "day3.hpp"
 
-using namespace std;
-
-vector<string> open_file(string file_name);
-int tree_counting(vector<string> strs);
-unsigned long long tree_changing_step_size(vector<string> strs, int x_steps[], int y_steps[], int size);
 
 int main() {
 	int sum_one = 0;
@@ -20,7 +12,6 @@ int main() {
 	cout << "sum one: " << sum_one << endl;
 	cout << "sum two: " << sum_two << endl;
 }
-
 
 vector<string> open_file(string file_name) {
 	ifstream hill_grid;
