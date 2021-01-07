@@ -7,13 +7,13 @@ using namespace std;
 
 vector<string> open_file(string file_name);
 int all_eight(vector<string> strs);
+int validate_parameter(string str, size_t start);
 
 int main() {
 
 	vector<string> passport = open_file("input");
 
-	int counter = all_eight(passport);
-	cout << counter << endl;
+	cout << all_eight(passport) << endl;
 }
 
 vector<string> open_file(string file_name) {
@@ -39,16 +39,15 @@ int all_eight(vector<string> strs) {
 	// need to find all needed things.
 	// ecl, pid, eyr, hcl, byr, iyr, hgt .. cid not needed or don't care.
 	int counter = 0;
-	int wait_til_blank= 0;
+	int wait_til_blank = 0;
 
-	size_t ecl = 0;		
-	size_t pid = 0;
-	size_t eyr = 0;
-	size_t hcl = 0;
-	size_t byr = 0;
-	size_t iyr = 0;
-	size_t hgt = 0;
-	cout << strs.size() << endl;
+	size_t ecl = string::npos;		
+	size_t pid = string::npos;
+	size_t eyr = string::npos;
+	size_t hcl = string::npos;
+	size_t byr = string::npos;
+	size_t iyr = string::npos;
+	size_t hgt = string::npos;
 	for(auto i: strs) {
 		if(wait_til_blank){
 			ecl = string::npos;
@@ -73,36 +72,31 @@ int all_eight(vector<string> strs) {
 			hgt = string::npos;
 			
 		}
-		if(ecl == string::npos) {
+		if(i.find("ecl") != string::npos) {
 			ecl = i.find("ecl");
 		}
-		if(pid == string::npos) {
+		if(i.find("pid") != string::npos) {
 			pid = i.find("pid");
 		}
-		if(eyr == string::npos) {
+		if(i.find("eyr") != string::npos) {
 			eyr = i.find("eyr");
 		}
-		if(hcl == string::npos) {
+		if(i.find("hcl") != string::npos) {
 			hcl = i.find("hcl");
 		}
-		if(byr == string::npos) {
+		if(i.find("byr") != string::npos) {
 			byr = i.find("byr");
 		}
-		if(iyr == string::npos) {
+		if(i.find("iyr") != string::npos) {
 			iyr = i.find("iyr");
 		}
-		if(hgt == string::npos) {
+		if(i.find("hgt") != string::npos) {
 			hgt = i.find("hgt");
+			validate_parameter(i, hgt);
 		}
-		if(ecl && pid && eyr && hcl && byr && iyr && hgt) {
-			/*cout << ecl << " ";
-			cout << pid << " ";
-			cout << eyr << " ";
-			cout << hcl << " ";
-			cout << byr << " ";
-			cout << iyr << " ";
-			cout << hgt << endl;
-			*/
+		if(ecl != string::npos && pid != string::npos && eyr != string::npos && hcl != string::npos && \
+				byr != string::npos && iyr != string::npos && hgt != string::npos) {
+			
 			counter++;
 			
 			wait_til_blank = 1;		
@@ -113,8 +107,24 @@ int all_eight(vector<string> strs) {
 			byr = string::npos;
 			iyr = string::npos;
 			hgt = string::npos;	
-			continue;
 		}
 	}
 	return counter;
+}
+
+int validate_parameter(string str, size_t start) {
+	size_t i = start;
+	while(1) {
+		if(str[i] == ' ' || i >= str.size()) {
+			break;
+		}
+
+		else {
+			cout << str[i];
+			
+		}
+		i++;
+	}
+	cout << endl;
+	return 0;
 }
