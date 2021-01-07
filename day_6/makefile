@@ -2,14 +2,15 @@ CC = clang++
 
 CFLAGS = -g -Wall
 
-TARGET = day5
+TARGET = day6
 
-INCLUDE = function
+INCLUDE = -I../day_5/ ../day_5/function.cpp
+
 
 all: $(TARGET)
 
 $(TARGET): $(TARGET).cpp
-	$(CC) $(CFLAGS) $(INCLUDE).cpp -o $(TARGET).o $(TARGET).cpp
+	$(CC) $(CFLAGS) $(INCLUDE) -o $(TARGET).o $(TARGET).cpp
 
 clean:
 	$(RM) $(TARGET).o
